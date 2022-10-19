@@ -54,10 +54,13 @@ public class TripServiceTest {
         Trip japanTrip = new Trip("Japan");
         otherUser.addTrip(icelandTrip);
         otherUser.addTrip(japanTrip);
+
         when(tripDAO.findTripsOfUser(otherUser)).thenReturn(List.of(icelandTrip,japanTrip));
 
+        final List<Trip> expectedTrips = tripService.getTripsFromFriend(loggedUser,otherUser);
 
-        assertEquals(List.of(icelandTrip,japanTrip),tripService.getTripsFromFriend(loggedUser,otherUser));
+
+        assertEquals(List.of(icelandTrip,japanTrip),expectedTrips);
     }
 
     @Test
